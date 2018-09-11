@@ -26,6 +26,8 @@ const users= require('./routes/users');
 const mail= require('./routes/mails');
 const unidades= require('./routes/unidades');
 const clientes= require('./routes/clientes');
+const estados= require('./routes/estados');
+const movimientos= require('./routes/movimientos');
 
 const  port = 3000;
 
@@ -45,9 +47,11 @@ app.use('/users', users);
 app.use('/mail', mail);
 app.use('/unidades', unidades);
 app.use('/clientes', clientes);
+app.use('/estados', estados);
+app.use('/movimientos', movimientos);
 
 app.get('/', (req,res) => {
-    res.send('Invalido');
+    res.send('URL Invalida');
 });
 
 // app.get('*', (req,res) => {
@@ -56,6 +60,6 @@ app.get('/', (req,res) => {
 
 
 app.listen(port, () => {
-    console.log("server iniciao en puerto: "+port)
+    console.log("Servidor iniciado en puerto: "+port)
 });
 
