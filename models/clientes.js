@@ -21,7 +21,8 @@ const  ClientesSchema = new Schema({
     }
 });
 
-const  Clientes= module.exports= mongoose.model('clientes', ClientesSchema) ;
+const  Clientes= mongoose.model('clientes', ClientesSchema) ;
+module.exports = Clientes;
 
 module.exports.getClientes= function (req, callback) {
     const  query = {baja: false}
@@ -59,5 +60,8 @@ module.exports.updateClientes= function (cliente1, res) {
         }
     });
 }
+
+
+
 
 

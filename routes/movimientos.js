@@ -19,7 +19,7 @@ router.get('/movimientos', passport.authenticate('jwt', {session: false}), funct
 
 router.post('/nuevoMovimiento', (req,res, next) => {
     let newMovimiento= new Movimiento({
-        // nombre: req.body.nombre,
+         nombre: req.body.nombre,
     });
 
     Movimiento.addMovimientos(newMovimiento, (err,user) =>{

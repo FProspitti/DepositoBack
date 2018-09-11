@@ -3,12 +3,14 @@ const  bcrypt = require('bcryptjs');
 const  config=require('../config/database');
 const  hoy=new Date();
 const Schema = mongoose.Schema;
-const ClientesSchema=require('./clientes');
+var Clientes=require('./clientes');
+
+
 
 const  MovimientosSchema = mongoose.Schema({
     cliente: {
         type: Schema.Types.ObjectId,
-        ref: "clientes"
+        ref: "Clientes"
     },
     estado: {
         type: Schema.Types.ObjectId,
@@ -34,7 +36,7 @@ const  MovimientosSchema = mongoose.Schema({
 });
 
 const  Movimientos= mongoose.model('movimientos', MovimientosSchema) ;
-// const  Clientes= mongoose.model('clientes', ClientesSchema) ;
+module.exports = Movimientos;
 // const  Cliente= module.exports= mongoose.model('clientes', clientesSchema) ;
 // const  Estado= module.exports= mongoose.model('estados', EstadosSchema) ;
 // const  User= module.exports= mongoose.model('user', UserSchema) ;
@@ -45,6 +47,13 @@ module.exports.getMovimientos= function (req, callback) {
 }
 
 module.exports.addMovimientos= function (newMovimiento, callback) {
+
+    var cl=new Clientes({
+        _id:'5b90112ecbea4833005b9105',
+        nombre:'Raul'
+    });
+
+    newMovimiento.cliente=cl;
     newMovimiento.fechaAlta=hoy;
     newMovimiento.save(callback);
 
@@ -76,8 +85,8 @@ module.exports.addMovimientos= function (newMovimiento, callback) {
 //     });
 // }
 
-module.exports = Movimientos;
-// module.exports = Clientes;
+
+
 
 
 
