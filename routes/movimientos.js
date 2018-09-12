@@ -18,10 +18,15 @@ router.get('/movimientos', passport.authenticate('jwt', {session: false}), funct
 });
 
 router.post('/nuevoMovimiento', (req,res, next) => {
+
+
+
     let newMovimiento= new Movimiento({
-         nombre: req.body.nombre,
+         cliente: req.body.cliente,
     });
 
+    console.log("Fedefdssd");
+    console.log(newMovimiento);
     Movimiento.addMovimientos(newMovimiento, (err,user) =>{
     if(err){
         res.json({success: false, msg: 'Error al crear Movimiento'});

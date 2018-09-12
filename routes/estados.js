@@ -18,6 +18,8 @@ router.get('/estados', passport.authenticate('jwt', {session: false}), function(
 });
 
 router.post('/nuevoEstado', (req,res, next) => {
+    console.log("Fedefdssd");
+    console.log(req.body);
     let newEstado= new Estado({
         nombre: req.body.nombre,
     });
