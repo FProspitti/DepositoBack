@@ -46,7 +46,6 @@ module.exports.getMovimientos= function (req, callback) {
 
 module.exports.addMovimientos= function (newMovimiento, callback) {
 
-    // newMovimiento.cliente=cl;
     newMovimiento.fechaAlta=hoy;
     newMovimiento.save(callback);
 
