@@ -23,10 +23,10 @@ router.post('/nuevoMovimiento', (req,res, next) => {
 
     let newMovimiento= new Movimiento({
          cliente: req.body.cliente,
+         estado: req.body.estado,
+         fechaIngreso: req.body.fechaIngreso,
     });
 
-    console.log("Fedefdssd");
-    console.log(newMovimiento);
     Movimiento.addMovimientos(newMovimiento, (err,user) =>{
     if(err){
         res.json({success: false, msg: 'Error al crear Movimiento'});
