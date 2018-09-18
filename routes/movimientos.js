@@ -37,25 +37,16 @@ router.post('/nuevoMovimiento', (req,res, next) => {
 });
 
 
-/*router.put('/deleteEstadp', passport.authenticate('jwt', {session: false}), function(req, res) {
-    Estado.deleteEstados(req.body._id, function(err,user1) {
-        if(err){
-            res.json({success: false, msg: 'Error actualizar'});
-        }else{
-            res.json({success: true, msg: 'Estado modificado'});
-        }
+router.get('/getMovimiento', (req, res, next) => {
+
+    console.log('fede');
+    console.log(req);
+
+    Movimiento.getMovimiento(req, function(err,movimiento) {
+        res.send(movimiento)
+
     })
 });
-
-router.put('/updateEstado', passport.authenticate('jwt', {session: false}), function(req, res) {
-    Estado.updateEstados(req.body, function(err,user1) {
-        if(err){
-            res.json({success: false, msg: 'Error actualizar'});
-        }else{
-            res.json({success: true, msg: 'Estado modificado'});
-        }
-    })
-});*/
 
 
 
