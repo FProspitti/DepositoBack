@@ -50,15 +50,19 @@ module.exports.deleteClientes= function (id, res) {
 }
 
 module.exports.updateClientes= function (cliente1, res) {
-    Clientes.findById(cliente1._id, function(error, cliente){
-        if(error){
-            callback(null,'Error al intentar modificar el cliente.');
-        }else{
+    Clientes.findById(cliente1._id, function (error, cliente) {
+        if (error) {
+            callback(null, 'Error al intentar modificar el cliente.');
+        } else {
             var cliente = cliente;
-            cliente.nombre=cliente1.nombre;
+            cliente.nombre = cliente1.nombre;
             cliente.save(res);
         }
     });
+
+}
+    module.exports.getCliente= function (id, res) {
+        Clientes.findById(id).exec(res);
 }
 
 

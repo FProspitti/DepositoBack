@@ -10,9 +10,25 @@ const Movimiento = require('../models/movimientos');
 
 
 
-router.get('/movimientos', passport.authenticate('jwt', {session: false}), function(req, res) {
-    Movimiento.getEstados(req, function(err,estado) {
-        res.send(estado);
+router.get('/movimientos/:idCliente', passport.authenticate('jwt', {session: false}), function(req, res) {
+    console.log('Llega');
+
+    let obj = new Object();
+
+    obj = req.params.idCliente;
+
+        console.log(obj.cliente);
+
+    let movimientoFiltro= new Object({
+        cliente: req.params.idCliente.cliente,
+        estado: req.params.idCliente.estado,
+        fechaDesde: req.params.idCliente.fechaDesde,
+        fechaHasta: req.params.idCliente.fechaHasta
+    });
+
+    console.log(movimientoFiltro);
+    Movimiento.getMovimientos(movimientoFiltro, function(err,movimientos) {
+        res.send(movimientos);
 
 })
 });
@@ -37,12 +53,9 @@ router.post('/nuevoMovimiento', (req,res, next) => {
 });
 
 
-router.get('/getMovimiento', (req, res, next) => {
+router.get('/getMovimiento/:id', (req, res, next) => {
 
-    console.log('fede');
-    console.log(req);
-
-    Movimiento.getMovimiento(req, function(err,movimiento) {
+    Movimiento.getMovimiento(req.params.id, function(err,movimiento) {
         res.send(movimiento)
 
     })

@@ -54,6 +54,12 @@ router.put('/updateEstado', passport.authenticate('jwt', {session: false}), func
     })
 });
 
+router.get('/getEstado/:id', (req, res, next) => {
+    Estado.getEstado(req.params.id, function(err,estado) {
+        res.send(estado);
+    })
+});
+
 
 
 module.exports = router;

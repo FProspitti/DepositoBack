@@ -49,6 +49,8 @@ module.exports = Movimientos;
 
 
 module.exports.getMovimientos= function (req, callback) {
+    console.log('Azucar');
+    console.log(req);
     const  query = {baja: false}
     Movimientos.find(query,callback);
 }

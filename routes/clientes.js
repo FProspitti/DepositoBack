@@ -53,5 +53,12 @@ router.put('/updateCliente', passport.authenticate('jwt', {session: false}), fun
 });
 
 
+router.get('/getCliente/:id', (req, res, next) => {
+    Cliente.getCliente(req.params.id, function(err,cliente) {
+        res.send(cliente);
+   })
+});
+
+
 
 module.exports = router;
