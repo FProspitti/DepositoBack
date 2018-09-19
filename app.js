@@ -29,6 +29,7 @@ const clientes= require('./routes/clientes');
 const estados= require('./routes/estados');
 const movimientos= require('./routes/movimientos');
 
+
 const  port = 3000;
 
 app.use(cors());

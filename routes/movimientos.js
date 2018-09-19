@@ -1,32 +1,36 @@
 /**
  * Created by Fede on 06/06/2018.
  */
+// import {MovimientosFiltro} from "../models/movimientosFiltro";
+
 const  express=require('express');
 const  router=express.Router();
 const passport=  require('passport');
 const jwt=  require('jsonwebtoken');
 const config= require('../config/database');
 const Movimiento = require('../models/movimientos');
+const Clientes = require('../models/clientes');
 
 
 
-router.get('/movimientos/:idCliente', passport.authenticate('jwt', {session: false}), function(req, res) {
-    console.log('Llega');
+router.get('/movimientos', passport.authenticate('jwt', {session: false}), function(req, res) {
 
-    let obj = new Object();
+    // let cli= new Clientes(req.query.cliente);
 
-    obj = req.params.idCliente;
 
-        console.log(obj.cliente);
 
-    let movimientoFiltro= new Object({
-        cliente: req.params.idCliente.cliente,
-        estado: req.params.idCliente.estado,
-        fechaDesde: req.params.idCliente.fechaDesde,
-        fechaHasta: req.params.idCliente.fechaHasta
+
+    // console.log('Cliente',cli);
+
+     let movimientoFiltro= new Object({
+        cliente: req.query.cliente,
+        estado: req.query.estado,
+        fechaDesde: req.query.fechaDesde,
+        fechaHasta: req.query.fechaHasta
     });
 
-    console.log(movimientoFiltro);
+     console.log('Filtro',movimientoFiltro);
+
     Movimiento.getMovimientos(movimientoFiltro, function(err,movimientos) {
         res.send(movimientos);
 
@@ -34,8 +38,6 @@ router.get('/movimientos/:idCliente', passport.authenticate('jwt', {session: fal
 });
 
 router.post('/nuevoMovimiento', (req,res, next) => {
-
-
 
     let newMovimiento= new Movimiento({
          cliente: req.body.cliente,
