@@ -21,8 +21,6 @@ router.get('/movimientos', passport.authenticate('jwt', {session: false}), funct
         fechaHasta: req.query.fechaHasta
     });
 
-     console.log('Filtro',movimientoFiltro);
-
     Movimiento.getMovimientos(movimientoFiltro, function(err,movimientos) {
         res.send(movimientos);
 
