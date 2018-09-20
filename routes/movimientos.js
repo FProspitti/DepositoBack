@@ -9,22 +9,14 @@ const passport=  require('passport');
 const jwt=  require('jsonwebtoken');
 const config= require('../config/database');
 const Movimiento = require('../models/movimientos');
-const Clientes = require('../models/clientes');
 
 
 
 router.get('/movimientos', passport.authenticate('jwt', {session: false}), function(req, res) {
 
-    // let cli= new Clientes(req.query.cliente);
-
-
-
-
-    // console.log('Cliente',cli);
-
      let movimientoFiltro= new Object({
-        cliente: req.query.cliente,
-        estado: req.query.estado,
+        clienteId: req.query.clienteId,
+        estadoId: req.query.estadoId,
         fechaDesde: req.query.fechaDesde,
         fechaHasta: req.query.fechaHasta
     });

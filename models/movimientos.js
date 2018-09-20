@@ -49,7 +49,22 @@ module.exports = Movimientos;
 
 
 module.exports.getMovimientos= function (req, callback) {
-    const  query = {baja: false}
+    console.log('parametotto: ',req)
+    let  query;
+    //  if((req.clienteId ='T') && (req.estadoId ='T')){
+    //      query = {baja: false, fechaIngreso: new Date(req.fechaDesde)};
+    // } else
+    //     if((req.clienteId != 'T') && (req.estadoId != 'T')){
+    //         query = {baja: false, cliente: req.clienteId, estado: req.estadoId, fechaIngreso: new Date(req.fechaDesde)}
+    //  } else
+    //     if((req.clienteId = 'T') && req.estadoId){
+    //         query = {baja: false, estado: req.estadoId, fechaIngreso: new Date(req.fechaDesde)}
+    //     } else
+    //     if(req.clienteId && (req.estadoId = 'T')){
+    //         query = {baja: false, cliente: req.clienteId, fechaIngreso: new Date(req.fechaDesde)}
+    //     }
+
+    query = {baja: false, cliente: req.clienteId, estado: req.estadoId, fechaIngreso: { '$gte': new Date(req.fechaDesde), '$lte': new Date(req.fechaHasta) }}
     Movimientos.find(query,callback);
 }
 
