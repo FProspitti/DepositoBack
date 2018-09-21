@@ -16,15 +16,15 @@ var  MovimientosSchema = mongoose.Schema({
     },
     cliente: {
         type: Schema.Types.ObjectId,
-        ref: "Clientes"
+        ref: 'Clientes'
     },
     estado: {
         type: Schema.Types.ObjectId,
-        ref: "estados"
+        ref: 'Estados'
     },
     users: {
         type: Schema.Types.ObjectId,
-        ref: "user"
+        ref: 'user'
     },
     fechaIngreso: {
         type: Date,
@@ -67,7 +67,9 @@ module.exports.getMovimientos= function (req, callback) {
             query = {baja: false, cliente: req.clienteId, fechaIngreso: { '$gte': new Date(req.fechaDesde), '$lte': new Date(req.fechaHasta)}};
             console.log('4: ')
         }
-    Movimientos.find(query,callback);
+    Movimientos.find(query,callback).populate({ path: 'cliente', select: 'nombre' }).
+    populate({ path: 'estado', select: 'nombre' }).exec(function (err, movi) {
+    });
 }
 
 module.exports.addMovimientos= function (newMovimiento, callback) {

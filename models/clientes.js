@@ -21,7 +21,7 @@ const  ClientesSchema = new Schema({
     }
 });
 
-const  Clientes= mongoose.model('clientes', ClientesSchema) ;
+const  Clientes= mongoose.model('Clientes', ClientesSchema) ;
 module.exports = Clientes;
 
 module.exports.getClientes= function (req, callback) {

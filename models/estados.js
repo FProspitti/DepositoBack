@@ -20,7 +20,7 @@ const  EstadosSchema = mongoose.Schema({
     }
 });
 
-const  Estados= module.exports= mongoose.model('estados', EstadosSchema) ;
+const  Estados= module.exports= mongoose.model('Estados', EstadosSchema) ;
 
 module.exports.getEstados= function (req, callback) {
     const  query = {baja: false}
