@@ -29,6 +29,9 @@ const  UserSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    fechaAlta: {
+        type: Date,
+    },
     fechaBaja: {
         type: Date,
     }
@@ -49,8 +52,9 @@ module.exports.addUser= function (newUser, callback) {
     bcrypt.genSalt(8, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
         if(err) throw err;
-    newUser.password = hash;
-    newUser.save(callback);
+            newUser.fechaAlta = hoy;
+            newUser.password = hash;
+            newUser.save(callback);
     });
     });
 }

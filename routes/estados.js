@@ -34,7 +34,7 @@ router.post('/nuevoEstado', (req,res, next) => {
 });
 
 
-router.put('/deleteEstadp', passport.authenticate('jwt', {session: false}), function(req, res) {
+router.put('/deleteEstado', passport.authenticate('jwt', {session: false}), function(req, res) {
     Estado.deleteEstados(req.body._id, function(err,user1) {
         if(err){
             res.json({success: false, msg: 'Error actualizar'});

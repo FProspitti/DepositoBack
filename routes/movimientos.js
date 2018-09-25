@@ -35,11 +35,11 @@ router.post('/nuevoMovimiento', (req,res, next) => {
          fechaIngreso: req.body.fechaIngreso,
     });
 
-    Movimiento.addMovimientos(newMovimiento, (err,user) =>{
+    Movimiento.addMovimientos(newMovimiento, (err,movimiento) =>{
     if(err){
         res.json({success: false, msg: 'Error al crear Movimiento'});
     }else{
-        res.json({success: true, msg: 'Movimiento creado'});
+        res.json({success: true, msg: 'Movimiento creado', mov: movimiento});
 }
 });
 });
