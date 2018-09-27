@@ -49,7 +49,6 @@ module.exports = Movimientos;
 
 
 module.exports.getMovimientos= function (req, callback) {
-    console.log('parametotto: ',req)
     let  query;
      if((req.clienteId == 'T') && (req.estadoId == 'T')){
          query = {baja: false, fechaIngreso: { '$gte': new Date(req.fechaDesde), '$lte': new Date(req.fechaHasta)}};
@@ -72,10 +71,16 @@ module.exports.getMovimientos= function (req, callback) {
     });
 }
 
-module.exports.addMovimientos= function (newMovimiento, callback) {
+module.exports.addMovimientos= function (newMovimiento, res) {
 
         newMovimiento.fechaAlta=hoy;
-        newMovimiento.save(callback);
+        newMovimiento.save(function(err, data) {
+            if(err) console.log('Error al guardar movimiento:', err);
+            else {
+                Movimientos.findById(data._id).populate({ path: 'cliente', select: 'nombre' }).
+                populate({ path: 'estado', select: 'nombre' }).exec(res);
+            }
+        });
 }
 
 module.exports.getMovimiento= function (id, callback) {
