@@ -28,11 +28,11 @@ router.get('/movimientos', passport.authenticate('jwt', {session: false}), funct
 });
 
 router.post('/nuevoMovimiento', (req,res, next) => {
-
+    console.log('movimientoooo: ',req.body)
     let newMovimiento= new Movimiento({
          cliente: req.body.cliente,
          estado: req.body.estado,
-         fechaIngreso: req.body.fechaIngreso,
+         fechaRegistro: req.body.fechaRegistro,
     });
 
     Movimiento.addMovimientos(newMovimiento, (err,movimiento) =>{
@@ -42,6 +42,16 @@ router.post('/nuevoMovimiento', (req,res, next) => {
         res.json({success: true, msg: 'Movimiento creado', mov: movimiento});
 }
 });
+});
+
+router.put('/updateMovimiento', passport.authenticate('jwt', {session: false}), function(req, res) {
+    Movimiento.updateMovimientos(req.body, function(err,user1) {
+        if(err){
+            res.json({success: false, msg: 'Error actualizar'});
+        }else{
+            res.json({success: true, msg: 'Estado modificado'});
+        }
+    })
 });
 
 

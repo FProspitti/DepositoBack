@@ -29,8 +29,17 @@ var  MovimientosSchema = mongoose.Schema({
     fechaIngreso: {
         type: Date,
     },
+    fechaSalida: {
+        type: Date,
+    },
+    fechaRegistro: {
+        type: Date,
+    },
     fechaAlta: {
         type: Date,
+    },
+    cantDias:{
+        type: Number,
     },
     baja: {
         type: Boolean,
@@ -87,4 +96,19 @@ module.exports.getMovimiento= function (id, callback) {
     const  query = {idMov: id}
     Movimientos.findOne(query,callback);
 }
+
+module.exports.updateMovimientos= function (movimiento1, res) {
+    Movimientos.findById(movimiento1._id, function(error, movimiento){
+        if(error){
+            callback(null,'Error al intentar modificar el Estado.');
+        }else{
+            var movimiento = movimiento;
+            movimiento.cliente = movimiento1.cliente,
+            movimiento.estado = movimiento1.estado,
+            movimiento.fechaSalida = this.fechaSalida
+            movimiento.save(res);
+        }
+    });
+}
+
 

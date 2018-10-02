@@ -59,8 +59,15 @@ module.exports.updateEstados= function (estado1, res) {
     });
 }
 
+module.exports.getEstadoNombre= function (nombre, callback) {
+    const  query = {nombre: nombre}
+    Estados.findOne(query,callback);
+}
+
 module.exports.getEstado= function (id, res) {
     Estados.findById(id).exec(res);
 }
+
+
 
 
