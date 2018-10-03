@@ -98,14 +98,22 @@ module.exports.getMovimiento= function (id, callback) {
 }
 
 module.exports.updateMovimientos= function (movimiento1, res) {
+    console.log('Movimiento actualizad',movimiento1)
     Movimientos.findById(movimiento1._id, function(error, movimiento){
+        console.log('Movimiento viejo',movimiento)
         if(error){
             callback(null,'Error al intentar modificar el Estado.');
         }else{
             var movimiento = movimiento;
             movimiento.cliente = movimiento1.cliente,
-            movimiento.estado = movimiento1.estado,
-            movimiento.fechaSalida = this.fechaSalida
+            movimiento.estado = movimiento1.estado
+                if(movimiento1.estado.nombre == 'Ingreso') {
+                    console.log('Ingreso');
+                    movimiento.fechaIngreso = movimiento1.fecha
+                }else  if(movimiento1.estado.nombre == 'Salida'){
+                    console.log('Salida');
+                    movimiento.fechaSalida = movimiento1.fecha
+                }
             movimiento.save(res);
         }
     });

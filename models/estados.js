@@ -23,7 +23,7 @@ const  EstadosSchema = mongoose.Schema({
 const  Estados= module.exports= mongoose.model('Estados', EstadosSchema) ;
 
 module.exports.getEstados= function (req, callback) {
-    const  query = {baja: false}
+    const  query = {baja: false, nombre: { '$ne': 'Registro'}}
     Estados.find(query,callback);
 }
 

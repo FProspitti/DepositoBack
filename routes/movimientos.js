@@ -32,7 +32,7 @@ router.post('/nuevoMovimiento', (req,res, next) => {
     let newMovimiento= new Movimiento({
          cliente: req.body.cliente,
          estado: req.body.estado,
-         fechaRegistro: req.body.fechaRegistro,
+         fechaRegistro: req.body.fechaRegistro
     });
 
     Movimiento.addMovimientos(newMovimiento, (err,movimiento) =>{
