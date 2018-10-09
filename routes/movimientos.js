@@ -63,6 +63,15 @@ router.get('/getMovimiento/:id', (req, res, next) => {
     })
 });
 
+router.put('/deleteMovimiento', passport.authenticate('jwt', {session: false}), function(req, res) {
+    Movimiento.deleteMovimientos(req.body._id, function(err,user1) {
+        if(err){
+            res.json({success: false, msg: 'Error actualizar'});
+        }else{
+            res.json({success: true, msg: 'Estado modificado'});
+        }
+    })
+});
 
 
 module.exports = router;

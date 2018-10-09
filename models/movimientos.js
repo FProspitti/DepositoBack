@@ -98,9 +98,7 @@ module.exports.getMovimiento= function (id, callback) {
 }
 
 module.exports.updateMovimientos= function (movimiento1, res) {
-    console.log('Movimiento actualizad',movimiento1)
     Movimientos.findById(movimiento1._id, function(error, movimiento){
-        console.log('Movimiento viejo',movimiento)
         if(error){
             callback(null,'Error al intentar modificar el Estado.');
         }else{
@@ -108,15 +106,31 @@ module.exports.updateMovimientos= function (movimiento1, res) {
             movimiento.cliente = movimiento1.cliente,
             movimiento.estado = movimiento1.estado
                 if(movimiento1.estado.nombre == 'Ingreso') {
-                    console.log('Ingreso');
                     movimiento.fechaIngreso = movimiento1.fecha
                 }else  if(movimiento1.estado.nombre == 'Salida'){
-                    console.log('Salida');
+                    var fechaI = new Date(movimiento.fechaIngreso);
+                    var fechaS = new Date(movimiento1.fecha);
+                    var total= fechaS - fechaI;
                     movimiento.fechaSalida = movimiento1.fecha
+                    movimiento.cantDias = (total/(1000*60*60*24));
                 }
             movimiento.save(res);
         }
     });
 }
+
+module.exports.deleteMovimientos= function (id, res) {
+    Movimientos.findById(id, function(error, movimiento){
+        if(error){
+            callback(null,'Error al intentar modificar el Estado.');
+        }else{
+            var movimiento = movimiento;
+            movimiento.fechaBaja = hoy;
+            movimiento.baja=true;
+            movimiento.save(res);
+        }
+    });
+}
+
 
 
