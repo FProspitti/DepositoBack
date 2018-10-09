@@ -41,6 +41,9 @@ var  MovimientosSchema = mongoose.Schema({
     cantDias:{
         type: Number,
     },
+    codigoBarras:{
+        type: String,
+    },
     baja: {
         type: Boolean,
         default: false
@@ -81,8 +84,9 @@ module.exports.getMovimientos= function (req, callback) {
 }
 
 module.exports.addMovimientos= function (newMovimiento, res) {
-
         newMovimiento.fechaAlta=hoy;
+        Movimientos.nextCount(function(err, count) {
+        newMovimiento.codigoBarras=this.calcularDigito(count);
         newMovimiento.save(function(err, data) {
             if(err) console.log('Error al guardar movimiento:', err);
             else {
@@ -90,10 +94,11 @@ module.exports.addMovimientos= function (newMovimiento, res) {
                 populate({ path: 'estado', select: 'nombre' }).exec(res);
             }
         });
+    });
 }
 
 module.exports.getMovimiento= function (id, callback) {
-    const  query = {idMov: id}
+    const  query = {codigoBarras: id}
     Movimientos.findOne(query,callback);
 }
 
@@ -131,6 +136,39 @@ module.exports.deleteMovimientos= function (id, res) {
         }
     });
 }
+
+calcularDigito = function (num, callback) {
+    var numero = this.ponerCeros(num.toString());
+    var result = 0;
+    var impar = 0;
+    var par = 0;
+    var array = [];
+    var i;
+    var y;
+    array = numero.split('');
+    for (i = 0; i < array.length; i++) {
+        impar = impar + parseInt(array[i]);
+        i++;
+    }
+    impar = impar * 3;
+    for (y = 1; y < array.length; y++) {
+        par = par + parseInt(array[y]);
+        y++;
+    }
+    result = impar + par;
+    var modulo = (10 - (result % 10)) % 10;
+    return   numero + modulo;
+
+}
+
+ponerCeros = function (numero, callback) {
+    while (numero.length < 11) {
+        numero = '0' + numero;
+    }
+    return numero;
+}
+
+
 
 
 

@@ -28,7 +28,6 @@ router.get('/movimientos', passport.authenticate('jwt', {session: false}), funct
 });
 
 router.post('/nuevoMovimiento', (req,res, next) => {
-    console.log('movimientoooo: ',req.body)
     let newMovimiento= new Movimiento({
          cliente: req.body.cliente,
          estado: req.body.estado,
