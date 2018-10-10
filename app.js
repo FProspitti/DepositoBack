@@ -28,6 +28,7 @@ const unidades= require('./routes/unidades');
 const clientes= require('./routes/clientes');
 const estados= require('./routes/estados');
 const movimientos= require('./routes/movimientos');
+const caracteristicas= require('./routes/caracteristicas');
 
 
 const  port = 3000;
@@ -50,6 +51,7 @@ app.use('/unidades', unidades);
 app.use('/clientes', clientes);
 app.use('/estados', estados);
 app.use('/movimientos', movimientos);
+app.use('/caracteristicas', caracteristicas);
 
 app.get('/', (req,res) => {
     res.send('URL Invalida');

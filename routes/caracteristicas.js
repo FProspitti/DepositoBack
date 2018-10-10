@@ -20,6 +20,7 @@ router.get('/caracteristicas', passport.authenticate('jwt', {session: false}), f
 router.post('/nuevaCaracteristica', (req,res, next) => {
     let newCaracteris= new Caracteristica({
         nombre: req.body.nombre,
+        tipo: req.body.tipo,
     });
 
     Caracteristica.addCaracteristica(newCaracteris, (err,user) =>{

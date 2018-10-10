@@ -34,6 +34,7 @@ module.exports.getCaracteristicas= function (req, callback) {
 }
 
 module.exports.addCaracteristica= function (newCaracteris, callback) {
+    console.log('carac: ',newCaracteris);
     newCaracteris.fechaAlta=hoy;
     newCaracteris.save(callback);
 
