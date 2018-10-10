@@ -11,7 +11,8 @@ const Caracteristica = require('../models/caracteristicas');
 
 
 router.get('/caracteristicas', passport.authenticate('jwt', {session: false}), function(req, res) {
-    Caracteristica.getCaracteristica(req, function(err,caracteristica1) {
+    Caracteristica.getCaracteristicas(req, function(err,caracteristica1) {
+        console.log('caracteri: ',caracteristica1);
         res.send(caracteristica1);
 
 })
