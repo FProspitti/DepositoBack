@@ -33,6 +33,17 @@ module.exports.getCaracteristicas= function (req, callback) {
     Caracteristicas.find(query,callback);
 }
 
+module.exports.getCaracteristicasFiltro= function (req, callback) {
+    let  query;
+    if(req.tipo == 0){
+        query = {baja: false};
+    } else{
+        query = {baja: false, tipo: req.tipo};
+    }
+    Caracteristicas.find(query,callback);
+}
+
+
 module.exports.addCaracteristica= function (newCaracteris, callback) {
     console.log('carac: ',newCaracteris);
     newCaracteris.fechaAlta=hoy;
@@ -61,6 +72,7 @@ module.exports.updateCaracteristica= function (caracteristica1, res) {
         } else {
             var caracteristica = caracteristica;
             caracteristica.nombre = caracteristica1.nombre;
+            caracteristica.tipo = caracteristica1.tipo;
             caracteristica.save(res);
         }
     });

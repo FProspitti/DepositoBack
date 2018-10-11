@@ -12,10 +12,21 @@ const Caracteristica = require('../models/caracteristicas');
 
 router.get('/caracteristicas', passport.authenticate('jwt', {session: false}), function(req, res) {
     Caracteristica.getCaracteristicas(req, function(err,caracteristica1) {
-        console.log('caracteri: ',caracteristica1);
         res.send(caracteristica1);
 
 })
+});
+
+router.get('/caracteristicasFiltro', passport.authenticate('jwt', {session: false}), function(req, res) {
+
+    let caracteristicaFiltro= new Object({
+        tipo: req.query.tipo
+    });
+
+    Caracteristica.getCaracteristicasFiltro(caracteristicaFiltro, function(err,caracteristicas) {
+        res.send(caracteristicas);
+
+    })
 });
 
 router.post('/nuevaCaracteristica', (req,res, next) => {
