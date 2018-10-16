@@ -40,6 +40,7 @@ module.exports.getCaracteristicasFiltro= function (req, callback) {
     } else{
         query = {baja: false, tipo: req.tipo};
     }
+    console.log('Carac fede: ',req.tipo);
     Caracteristicas.find(query,callback);
 }
 
@@ -81,6 +82,12 @@ module.exports.updateCaracteristica= function (caracteristica1, res) {
     module.exports.getCaracteristica= function (id, res) {
         Caracteristicas.findById(id).exec(res);
 }
+
+module.exports.getCaracteristicasTipo= function (req, callback) {
+    let  query = {baja: false, tipo: req};
+    Caracteristicas.find(query,callback);
+}
+
 
 
 

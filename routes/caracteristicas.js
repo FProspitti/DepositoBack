@@ -72,6 +72,10 @@ router.get('/getCaracteristica/:id', (req, res, next) => {
    })
 });
 
-
+router.get('/caracteristicasTipo/:tipo', (req, res, next) => {
+    Caracteristica.getCaracteristicasTipo(req.params.tipo, function(err,caracteristicas) {
+        res.send(caracteristicas);
+    })
+});
 
 module.exports = router;
