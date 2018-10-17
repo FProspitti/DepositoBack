@@ -26,6 +26,43 @@ var  MovimientosSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
+    caracteristicas1: {
+        type: Schema.Types.ObjectId,
+        ref: 'Caracteristicas'
+    },
+    caracteristicas2: {
+        type: Schema.Types.ObjectId,
+        ref: 'Caracteristicas'
+    },
+    caracteristicas3: {
+        type: Schema.Types.ObjectId,
+        ref: 'Caracteristicas'
+    },
+    caracteristicas4: {
+        type: Schema.Types.ObjectId,
+        ref: 'Caracteristicas'
+    },
+    caracteristicas5: {
+        type: Schema.Types.ObjectId,
+        ref: 'Caracteristicas'
+    },
+    caracteristicas6: {
+        type: Schema.Types.ObjectId,
+        ref: 'Caracteristicas'
+    },
+    caracteristicas7: {
+        type: Schema.Types.ObjectId,
+        ref: 'Caracteristicas'
+    },
+    caracteristicas8 : {
+        type: String
+    },
+    caracteristicas9 : {
+        type: String
+    },
+    caracteristicas10 : {
+        type: String
+    },
     fechaIngreso: {
         type: Date,
     },
@@ -99,7 +136,17 @@ module.exports.addMovimientos= function (newMovimiento, res) {
 
 module.exports.getMovimiento= function (id, callback) {
     const  query = {codigoBarras: id}
-    Movimientos.findOne(query,callback);
+    Movimientos.findOne(query,callback).populate({ path: 'cliente', select: 'nombre' })
+        .populate({ path: 'estado', select: 'nombre' })
+        .populate({ path: 'caracteristicas1', select: 'nombre' })
+        .populate({ path: 'caracteristicas2', select: 'nombre' })
+        .populate({ path: 'caracteristicas3', select: 'nombre' })
+        .populate({ path: 'caracteristicas4', select: 'nombre' })
+        .populate({ path: 'caracteristicas5', select: 'nombre' })
+        .populate({ path: 'caracteristicas6', select: 'nombre' })
+        .populate({ path: 'caracteristicas7', select: 'nombre' })
+        .exec(function (err, movi) {
+    });
 }
 
 module.exports.updateMovimientos= function (movimiento1, res) {
