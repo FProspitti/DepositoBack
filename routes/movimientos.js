@@ -68,10 +68,13 @@ router.put('/updateMovimiento', passport.authenticate('jwt', {session: false}), 
 router.get('/getMovimiento/:id', (req, res, next) => {
 
     Movimiento.getMovimiento(req.params.id, function(err,movimiento) {
-        console.log('queryyyyy:',movimiento);
-        res.send(movimiento)
+        if(err){
+            res.json({success: false, msg: 'No encontrado'});
+        }else{
+            res.send(movimiento);
+        }
 
-    })
+   })
 });
 
 router.put('/deleteMovimiento', passport.authenticate('jwt', {session: false}), function(req, res) {
