@@ -105,4 +105,14 @@ router.put('/updateUser', passport.authenticate('jwt', {session: false}), functi
     })
 });
 
+router.put('/updateUserPass', passport.authenticate('jwt', {session: false}), function(req, res) {
+    User.updateUserPass(req.body, function(err,user1) {
+        if(err){
+            res.json({success: false, msg: 'Error actualizar pass'});
+        }else{
+            res.json({success: true, msg: 'Pass modificado'});
+        }
+    })
+});
+
 module.exports = router;
