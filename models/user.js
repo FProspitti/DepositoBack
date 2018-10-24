@@ -98,9 +98,24 @@ module.exports.updateUser= function (user1, res) {
             usuario.name=user1.name;
             usuario.username=user1.username;
             usuario.email=user1.email;
-            usuario.password=user1.password;
             usuario.save(res);
     }
+    });
+}
+
+module.exports.updateUserPass= function (user1, res) {
+    User.findById(user1._id, function(error, user){
+        bcrypt.genSalt(8, (err, salt) => {
+            bcrypt.hash(user1.password, salt, (err, hash) => {
+                if(error){
+                    callback(null,'Error al intentar modificar el password.');
+                }else{
+                    var usuario = user;
+                    usuario.password=hash;
+                    usuario.save(res);
+                }
+            });
+        });
     });
 }
 
