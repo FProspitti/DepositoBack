@@ -17,9 +17,7 @@ router.get('/estados', passport.authenticate('jwt', {session: false}), function(
 })
 });
 
-router.post('/nuevoEstado', (req,res, next) => {
-    console.log("Fedefdssd");
-    console.log(req.body);
+router.post('/nuevoEstado',  passport.authenticate('jwt', {session: false}), function(req, res) {
     let newEstado= new Estado({
         nombre: req.body.nombre,
     });
@@ -54,13 +52,13 @@ router.put('/updateEstado', passport.authenticate('jwt', {session: false}), func
     })
 });
 
-router.get('/getEstadoNombre/:nombre', (req, res, next) => {
+router.get('/getEstadoNombre/:nombre', passport.authenticate('jwt', {session: false}), function(req, res) {
     Estado.getEstadoNombre(req.params.nombre, function(err,estado) {
         res.send(estado);
     })
 });
 
-router.get('/getEstado/:id', (req, res, next) => {
+router.get('/getEstado/:id', passport.authenticate('jwt', {session: false}), function(req, res) {
     Estado.getEstado(req.params.id, function(err,estado) {
         res.send(estado);
     })

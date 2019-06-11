@@ -61,7 +61,8 @@ module.exports.updateClientes= function (cliente1, res) {
     });
 
 }
-    module.exports.getCliente= function (id, res) {
+
+module.exports.getCliente= function (id, res) {
         Clientes.findById(id).exec(res);
 }
 

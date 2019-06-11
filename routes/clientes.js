@@ -17,7 +17,7 @@ router.get('/clientes', passport.authenticate('jwt', {session: false}), function
 })
 });
 
-router.post('/nuevoCliente', (req,res, next) => {
+router.post('/nuevoCliente', passport.authenticate('jwt', {session: false}), function(req, res) {
     let newCliente= new Cliente({
         nombre: req.body.nombre,
     });

@@ -101,19 +101,15 @@ module.exports.getMovimientos= function (req, callback) {
     let  query;
      if((req.clienteId == 'T') && (req.estadoId == 'T')){
          query = {baja: false, fechaIngreso: { '$gte': new Date(req.fechaDesde), '$lte': new Date(req.fechaHasta)}};
-         console.log('Todos: ')
     } else
         if((req.clienteId != 'T') && (req.estadoId != 'T')){
             query = {baja: false, cliente: req.clienteId, estado: req.estadoId, fechaIngreso: { '$gte': new Date(req.fechaDesde), '$lte': new Date(req.fechaHasta)}};
-            console.log('2: ')
      } else
         if((req.clienteId == 'T') && req.estadoId){
             query = {baja: false, estado: req.estadoId, fechaIngreso: { '$gte': new Date(req.fechaDesde), '$lte': new Date(req.fechaHasta)}};
-            console.log('3: ')
         } else
         if(req.clienteId && (req.estadoId == 'T')){
             query = {baja: false, cliente: req.clienteId, fechaIngreso: { '$gte': new Date(req.fechaDesde), '$lte': new Date(req.fechaHasta)}};
-            console.log('4: ')
         }
     Movimientos.find(query,callback).populate({ path: 'cliente', select: 'nombre' }).
     populate({ path: 'estado', select: 'nombre' }).exec(function (err, movi) {

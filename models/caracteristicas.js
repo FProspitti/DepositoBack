@@ -4,6 +4,7 @@ const  config=require('../config/database');
 const  hoy=new Date();
 const Schema = mongoose.Schema;
 
+
 const  CaracteristicasSchema = new Schema({
     nombre : {
         type: String,
@@ -27,6 +28,7 @@ const  CaracteristicasSchema = new Schema({
 
 const  Caracteristicas= mongoose.model('Caracteristicas', CaracteristicasSchema) ;
 module.exports = Caracteristicas;
+mongoose.Promise = Promise;
 
 module.exports.getCaracteristicas= function (req, callback) {
     const  query = {baja: false}
@@ -40,18 +42,14 @@ module.exports.getCaracteristicasFiltro= function (req, callback) {
     } else{
         query = {baja: false, tipo: req.tipo};
     }
-    console.log('Carac fede: ',req.tipo);
     Caracteristicas.find(query,callback);
 }
 
 
 module.exports.addCaracteristica= function (newCaracteris, callback) {
-    console.log('carac: ',newCaracteris);
-    newCaracteris.fechaAlta=hoy;
+    newCaracteris.fechaAlta = hoy;
     newCaracteris.save(callback);
-
 }
-
 
 module.exports.deleteCaracteristica= function (id, res) {
     Caracteristicas.findById(id, function(error, caracteristica){

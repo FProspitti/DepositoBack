@@ -27,8 +27,7 @@ router.get('/movimientos', passport.authenticate('jwt', {session: false}), funct
 })
 });
 
-router.post('/nuevoMovimiento', (req,res, next) => {
-    console.log('Movimiento cadera: ',req.body);
+router.post('/nuevoMovimiento', passport.authenticate('jwt', {session: false}), function(req, res) {
     let newMovimiento= new Movimiento({
          cliente: req.body.cliente,
          estado: req.body.estado,
@@ -65,7 +64,7 @@ router.put('/updateMovimiento', passport.authenticate('jwt', {session: false}), 
 });
 
 
-router.get('/getMovimiento/:id', (req, res, next) => {
+router.get('/getMovimiento/:id', passport.authenticate('jwt', {session: false}), function(req, res) {
 
     Movimiento.getMovimiento(req.params.id, function(err,movimiento) {
         if(err){

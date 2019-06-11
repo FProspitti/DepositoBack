@@ -29,19 +29,18 @@ router.get('/caracteristicasFiltro', passport.authenticate('jwt', {session: fals
     })
 });
 
-router.post('/nuevaCaracteristica', (req,res, next) => {
-    let newCaracteris= new Caracteristica({
+router.post('/nuevaCaracteristica', passport.authenticate('jwt', {session: false}), function(req, res) {
+    let newCaracteris = new Caracteristica({
         nombre: req.body.nombre,
         tipo: req.body.tipo,
     });
+     Caracteristica.addCaracteristica(newCaracteris, (err, user) => {
+            if (!err) {
+                res.json({success: true, msg: 'Caracterisitica creada'});
+                console.log('ok carac');
+            }
+        });
 
-    Caracteristica.addCaracteristica(newCaracteris, (err,user) =>{
-    if(err){
-        res.json({success: false, msg: 'Error al crear la caracterisitica'});
-    }else{
-        res.json({success: true, msg: 'Caracterisitica creada'});
-}
-});
 });
 
 

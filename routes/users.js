@@ -33,6 +33,7 @@ router.post('/authenticate', (req,res, next) => {
     const username= req.body.username;
     const password= req.body.password;
 
+    console.log("usuerrr:" + req);
 User.getUserByUserName(username, (err,user) =>{
     if(err) throw err;
 if(!user){

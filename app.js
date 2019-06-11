@@ -23,8 +23,6 @@ mongoose.connection.on('erro', (err) =>{
 const  app=express();
 
 const users= require('./routes/users');
-const mail= require('./routes/mails');
-const unidades= require('./routes/unidades');
 const clientes= require('./routes/clientes');
 const estados= require('./routes/estados');
 const movimientos= require('./routes/movimientos');
@@ -46,8 +44,6 @@ require('./config/passport')(passport);
 
 
 app.use('/users', users);
-app.use('/mail', mail);
-app.use('/unidades', unidades);
 app.use('/clientes', clientes);
 app.use('/estados', estados);
 app.use('/movimientos', movimientos);
