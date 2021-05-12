@@ -15,7 +15,7 @@
     "jsonwebtoken": "*",
     "mongoose": "*",
     "mongoose-auto-increment": "^5.0.1",
-    "nodemailer": "^4.6.7",
+    "nodemailer": "^6.4.16",
     "passport": "*",
     "passport-jwt": "*"
   },
